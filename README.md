@@ -1,2 +1,2 @@
 # Learning
-Container for JS Projects
+Container for Learning Stuff
