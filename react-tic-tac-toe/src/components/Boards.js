@@ -20,7 +20,6 @@ const Boards = (props) => {
     
             winningCombinations.forEach(function(wc, index, array) {
                 if  (wc.every(r => playerSelections.includes(r))) {
-                    //console.log(wc, index);
                     winner = true;
                 }
               });
@@ -28,13 +27,7 @@ const Boards = (props) => {
         };
 
         let symbol;
-        // console.log ("event target id::" + event.target.id);
-        // console.log ("player 1 symbol::" + props.players[0].symbol);
-        // console.log ("player 2 symbol::" + props.players[1].symbol);
-        // console.log (event.target.innerHTML !== props.players[0].symbol);
-        // console.log (event.target.innerHTML !== props.players[1].symbol);
         if (event.target.innerHTML !== props.players[0].symbol && event.target.innerHTML !== props.players[1].symbol) {
-            // console.log("Click accepted!");
             if (props.currentPlayerId === 'p1') {
                     props.nextPlayer(props.players[1]);
                     symbol = props.players[0].symbol;
