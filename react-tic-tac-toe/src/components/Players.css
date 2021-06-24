@@ -1,0 +1,13 @@
+.game-players__player1 {
+    display:inline-block;
+    width:50%;
+}
+
+.game-players__player2 {
+    display:inline-block;
+    width:50%;
+}
+
+.game-players__currentplayer {
+    text-align: center;
+}

@@ -5,7 +5,7 @@ import './Boards.css';
 const Boards = (props) => {
     const [p1Selections,setP1Selections] = useState(['']);
     const [p2Selections,setP2Selections] = useState(['']);
-    const [winningPlayer, setWinningPlayer] = useState('');
+    const [winningPlayer, setWinningPlayer] = useState([]);
 
     const winningCombinations = [
         ['b1','b2','b3'],['b4','b5','b6'],['b7','b8','b9'],
@@ -24,83 +24,85 @@ const Boards = (props) => {
         return winner;
     };
 
+    let currentPlayerId = props.currentPlayer.id;
+
     const boardClickHandler = (event) => {
 
-        let symbol;
-        if (winningPlayer === '' && event.target.innerHTML !== props.players[0].symbol && event.target.innerHTML !== props.players[1].symbol) {
-            if (props.currentPlayerId === 'p1') {
+        if (Object.keys(winningPlayer).length ===  0 && event.target.innerHTML !== props.players[0].symbol && event.target.innerHTML !== props.players[1].symbol) {
+            if (currentPlayerId === 'p1') {
                 props.nextPlayer(props.players[1]);
-                symbol = props.players[0].symbol;
+                event.target.innerHTML = props.players[0].symbol;
                 let selections = [...p1Selections, event.target.id];
                 setP1Selections(selections);
                 if(checkWinner(selections)){
-                    setWinningPlayer ('player1 wins');
+                    setWinningPlayer (props.currentPlayer);
                 }
             } else {
                 props.nextPlayer(props.players[0]);
-                symbol = props.players[1].symbol;
+                event.target.innerHTML = props.players[1].symbol;
                 let selections = [...p2Selections, event.target.id];
                 setP2Selections(selections);
                 if(checkWinner(selections)){
-                    setWinningPlayer ('player2 wins');
+                    setWinningPlayer (props.currentPlayer);
                 }
             }
-            event.target.innerHTML = symbol;
         }
     };
 
+    const refreshPage = () => {
+        window.location.reload(false);
+    };
+      
+
+    if (Object.keys(winningPlayer).length >  0) {
+        return (
+            <div className='game-winner-container'>
+                <div className='game-winner-display'>{winningPlayer.title} Wins!!!</div>
+                <div><button type='button' onClick={refreshPage}>Play Again</button></div>
+            </div>
+        );
+    }
+
     return (
-        <div>
-        <table>
-            <tbody>
-            <tr>
-                <td>Player 1 Selections:: {p1Selections} </td>
-            </tr>
-            <tr>
-                <td>Player 2 Selections:: {p2Selections}</td>
-            </tr>
-            <tr>
-                <td>{winningPlayer}</td>
-            </tr>
-            </tbody>
-        </table>
-        <table border='1' width='300'>
-            <tbody>
-              <tr>
-                <td>
-                    <label id="b1" onClick={boardClickHandler}>1</label>
-                </td>
-                <td>
-                    <label id="b2" onClick={boardClickHandler}>2</label>
-                </td>
-                <td>
-                    <label id="b3" onClick={boardClickHandler}>3</label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <label id="b4" onClick={boardClickHandler}>4</label>
-                </td>
-                <td>
-                    <label id="b5" onClick={boardClickHandler}>5</label>
-                </td>
-                <td>
-                    <label id="b6" onClick={boardClickHandler}>6</label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <label id="b7" onClick={boardClickHandler}>7</label>
-                </td>
-                <td>
-                    <label id="b8" onClick={boardClickHandler}>8</label>
-                </td>
-                <td>
-                    <label id="b9" onClick={boardClickHandler}>9</label>
-                </td>
-              </tr>
-          </tbody>
-        </table>
+        <div className='game-boards-container'>
+            <div className="game-boards__currentPlayer">
+                Current Player: {props.currentPlayer.title}
+            </div>
+            <div className='game-boards__boards'>
+                <div className='game-boards_boards-row1'>
+                    <div id="b1" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                    <div id="b2" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                    <div id="b3" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                </div>
+                <div className='game-boards_boards-row2'>
+                    <div id="b4" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                    <div id="b5" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                    <div id="b6" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                </div>
+                <div className='game-boards_boards-row3'>
+                    <div id="b7" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                    <div id="b8" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                    <div id="b9" className='game-board' onClick={boardClickHandler}>
+
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };

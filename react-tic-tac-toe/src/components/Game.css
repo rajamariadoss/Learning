@@ -1,0 +1,12 @@
+.game-container {
+    height: 400px;
+    width: 300px;
+    padding: 5px;
+    background-color: #E8F0F2;
+    position: absolute;
+    left: 300px;
+}
+
+h3 {
+    text-align: center;
+}
