@@ -5,6 +5,7 @@ import './Boards.css';
 const Boards = (props) => {
     const [p1Selections,setP1Selections] = useState(['']);
     const [p2Selections,setP2Selections] = useState(['']);
+    const [winningPlayer, setWinningPlayer] = useState('');
 
     const winningCombinations = [
         ['b1','b2','b3'],['b4','b5','b6'],['b7','b8','b9'],
@@ -12,35 +13,36 @@ const Boards = (props) => {
         ['b1','b5','b9'], ['b3','b5','b7']
     ];
 
+    const checkWinner = (playerSelections) => {
+    
+        let winner = false;
+        winningCombinations.forEach(function(wc, index, array) {
+            if  (wc.every(r => {return playerSelections.includes(r)})) {
+                winner = true;
+            }
+          });
+        return winner;
+    };
+
     const boardClickHandler = (event) => {
 
-        const checkWinner = (playerSelections) => {
-
-            let winner = false;
-    
-            winningCombinations.forEach(function(wc, index, array) {
-                if  (wc.every(r => playerSelections.includes(r))) {
-                    winner = true;
-                }
-              });
-            return winner;
-        };
-
         let symbol;
-        if (event.target.innerHTML !== props.players[0].symbol && event.target.innerHTML !== props.players[1].symbol) {
+        if (winningPlayer === '' && event.target.innerHTML !== props.players[0].symbol && event.target.innerHTML !== props.players[1].symbol) {
             if (props.currentPlayerId === 'p1') {
-                    props.nextPlayer(props.players[1]);
-                    symbol = props.players[0].symbol;
-                    setP1Selections(oldSelections => [...oldSelections, event.target.id]);
-                    if(checkWinner(p1Selections)){
-                        console.log ('player1 wins');
-                    }
+                props.nextPlayer(props.players[1]);
+                symbol = props.players[0].symbol;
+                let selections = [...p1Selections, event.target.id];
+                setP1Selections(selections);
+                if(checkWinner(selections)){
+                    setWinningPlayer ('player1 wins');
+                }
             } else {
                 props.nextPlayer(props.players[0]);
                 symbol = props.players[1].symbol;
-                setP2Selections(oldSelections => [...oldSelections, event.target.id]);
-                if(checkWinner(p2Selections)){
-                    console.log ('player2 wins');
+                let selections = [...p2Selections, event.target.id];
+                setP2Selections(selections);
+                if(checkWinner(selections)){
+                    setWinningPlayer ('player2 wins');
                 }
             }
             event.target.innerHTML = symbol;
@@ -56,6 +58,9 @@ const Boards = (props) => {
             </tr>
             <tr>
                 <td>Player 2 Selections:: {p2Selections}</td>
+            </tr>
+            <tr>
+                <td>{winningPlayer}</td>
             </tr>
             </tbody>
         </table>

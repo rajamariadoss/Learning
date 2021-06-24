@@ -1,15 +1,33 @@
+import React, {useState} from 'react';
 import Card from '../UI/Card';
-import ExpenseItem from './ExpenseItem';
+import ExpensesFilter from './ExpensesFilter';
+import ExpenseList from './ExpenseList';
 import './Expenses.css';
 
 function Expenses(props) {
+
+    const [filteredYear, setFilteredYear] = useState('All');
+    const [filteredExpenses, setFilteredExpenses] = useState(props.items);
+
+    const expenseFilterChangeHandler = (selectedYear) => {
+        setFilteredYear(selectedYear);
+        let expensesAfterFilter = props.items;
+        if (selectedYear !== 'All') {
+            expensesAfterFilter = (props.items).filter(expense => 
+            {
+                return selectedYear === expense.date.getFullYear().toString();
+            });
+        }
+        setFilteredExpenses(expensesAfterFilter);
+    };
+
     return (
+        <div>
         <Card className="expenses">
-            <ExpenseItem title={props.items[0].title} date={props.items[0].date} amount={props.items[0].amount} />
-            <ExpenseItem title={props.items[1].title} date={props.items[1].date} amount={props.items[1].amount} />
-            <ExpenseItem title={props.items[2].title} date={props.items[2].date} amount={props.items[2].amount} />
-            <ExpenseItem title={props.items[3].title} date={props.items[3].date} amount={props.items[3].amount} />
+            <ExpensesFilter selected={filteredYear} onExpenseFilterChange={expenseFilterChangeHandler} />
+            <ExpenseList items={filteredExpenses} />
         </Card>
+        </div>
     );
 }
 
