@@ -69,7 +69,7 @@ const Boards = (props) => {
                 Current Player: {props.currentPlayer.title}
             </div>
             <div className='game-boards__boards'>
-                <div className='game-boards_boards-row1'>
+                {/* <div className='game-boards_boards-row1'> */}
                     <div id="b1" className='game-board' onClick={boardClickHandler}>
 
                     </div>
@@ -79,8 +79,8 @@ const Boards = (props) => {
                     <div id="b3" className='game-board' onClick={boardClickHandler}>
 
                     </div>
-                </div>
-                <div className='game-boards_boards-row2'>
+                {/* </div>
+                <div className='game-boards_boards-row2'> */}
                     <div id="b4" className='game-board' onClick={boardClickHandler}>
 
                     </div>
@@ -90,8 +90,8 @@ const Boards = (props) => {
                     <div id="b6" className='game-board' onClick={boardClickHandler}>
 
                     </div>
-                </div>
-                <div className='game-boards_boards-row3'>
+                {/* </div>
+                <div className='game-boards_boards-row3'> */}
                     <div id="b7" className='game-board' onClick={boardClickHandler}>
 
                     </div>
@@ -101,7 +101,7 @@ const Boards = (props) => {
                     <div id="b9" className='game-board' onClick={boardClickHandler}>
 
                     </div>
-                </div>
+                {/* </div> */}
             </div>
         </div>
     )
