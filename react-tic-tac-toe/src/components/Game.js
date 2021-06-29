@@ -30,7 +30,7 @@ const Game = () => {
             <h3>Tic-Tac-Toe</h3>
           </div>
             <Players players={players} />
-            <Boards players={players} currentPlayer={currentPlayer} nextPlayer={onNextPlayerHandler} />
+            <Boards players={players} currentPlayer={currentPlayer} onNextPlayer={onNextPlayerHandler} />
         </div>
       );
 };
