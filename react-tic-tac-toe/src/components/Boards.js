@@ -67,8 +67,6 @@ const Boards = (props) => {
         setWinningPlayer([]);
         setBoardSelections([]);
         props.onNextPlayer(props.players[0]);
-        //boards.map(boardId => document.getElementById(boardId).innerHTML = "");
-        // window.location.reload(false);
     };
       
 
