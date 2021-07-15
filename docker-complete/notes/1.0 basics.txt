@@ -1,0 +1,36 @@
+open terminal
+cd > docker-complete
+> docker build .
+
+=> [internal] load build context                                                                      0.0s
+ => => transferring context: 8.54kB                                                                    0.0s
+ => [2/5] WORKDIR /app                                                                                 0.3s
+ => [3/5] COPY package.json .                                                                          0.0s
+ => [4/5] RUN npm install                                                                              3.5s
+ => [5/5] COPY . .                                                                                     0.0s
+ => exporting to image                                                                                 0.2s
+ => => exporting layers                                                                                0.2s
+ => => writing image sha256:c332fefe63fc60ff349d38741a1033837cea0b194dd12f98c714530bf2a80b1f  
+
+[This will build a docker image as described in Dockerfile, also make sure that docker is 
+running when running this command.]
+
+To start the container from the image
+-------------------------------------
+
+docker run -p 3000:3000 c332fefe63fc60ff349d38741a1033837cea0b194dd12f98c714530bf2a80b1f
+
+[-p is used to map the docker port 3000 to localhost OS port 3000 so that we can access the application 
+directly from the local browser.]
+
+open another terminal
+
+> docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS              PORTS                                       NAMES
+2017173e03e6   c332fefe63fc   "docker-entrypoint.s…"   About a minute ago   Up About a minute   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   xenodochial_wilson
+
+[copy container name - xenodochial_wilson, you can use this name to stop the container from next time.]
+
+> docker stop xenodochial_wilson
+
+

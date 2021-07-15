@@ -1,0 +1,39 @@
+.game-container {
+    border: 4mm ridge rgba(170, 50, 220, .6);
+    width: 300px;
+    height : 450px;
+    position: absolute;
+    left: 300px;
+
+}
+
+.game-container h3 {
+    text-align: center;
+}
+
+.players {
+    height: 50px;
+}
+
+.player {
+    float: left;
+    width: 50%;
+}
+
+.player.right{
+    text-align: right;
+}
+
+.boards{
+    display:grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+}
+
+.board{
+    height: 100px;
+    border: 2mm ridge;
+    font-size: 4rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;
+}

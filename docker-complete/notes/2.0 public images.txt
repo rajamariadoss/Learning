@@ -1,0 +1,16 @@
+https://hub.docker.com/
+
+Search for node to get to the node image.
+https://hub.docker.com/_/node
+
+cd to your folder
+> docker run node
+[This will create a container based on the official node image in the hub.]
+
+> docker ps -a
+[ To list the installed image]
+
+[To interact with the node in the interactive mode]
+> docker run -it node
+
+[Press ctrl + C, twice to exit the interactive mode.]
